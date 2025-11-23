@@ -1,15 +1,15 @@
 ---
 services:
-    re:
+    httpbin-re:
       build: '.'
       expose:
         - '80'
       restart: unless-stopped
 
     front:
-      image: 'nginx:1.27-alpine'
+      image: 'docker.io/library/nginx:1.29.3-alpine'
       depends_on:
-        - re
+        - httpbin-re
       ports:
         - '8080:80'
         - '8443:443'
@@ -17,7 +17,7 @@ services:
         - './nginx/conf.d:/etc/nginx/conf.d:ro'
         - './nginx/certs:/etc/nginx/certs:ro'
       healthcheck:
-        test: ['CMD', 'wget', '-qO', '-', 'http://localhost/healthz']
+        test: ['CMD', 'wget', '-qO', '-', 'http://localhost:8080/healthz']
         interval: 30s
         timeout: 5s
         retries: 3
