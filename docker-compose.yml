@@ -2,5 +2,24 @@
 services:
     re:
       build: '.'
+      expose:
+        - '80'
+      restart: unless-stopped
+
+    front:
+      image: 'nginx:1.27-alpine'
+      depends_on:
+        - re
       ports:
         - '8080:80'
+        - '8443:443'
+      volumes:
+        - './nginx/conf.d:/etc/nginx/conf.d:ro'
+        - './nginx/certs:/etc/nginx/certs:ro'
+      healthcheck:
+        test: ['CMD', 'wget', '-qO', '-', 'http://localhost/healthz']
+        interval: 30s
+        timeout: 5s
+        retries: 3
+        start_period: 10s
+      restart: unless-stopped

@@ -14,7 +14,31 @@ docker run -p 8080:80 ghcr.io/pichuang/httpbin-re:master
 docker-compose up -d
 ```
 
-See http://httpbin.org for more information.
+## TLS termination via nginx
+
+Steps below front the app with nginx so you get HTTP on `http://localhost:8080` and HTTPS on `https://localhost:8443`.
+
+1. Generate (or copy in) certificates. A quick self-signed pair looks like:
+
+  ```sh
+  mkdir -p nginx/certs
+  openssl req -x509 -nodes -newkey rsa:2048 \
+    -keyout nginx/certs/server.key \
+    -out nginx/certs/server.crt \
+    -subj "/CN=localhost" -days 365
+  ```
+
+  Replace the generated files with your trusted certificates when deploying elsewhere.
+
+1. Launch the compose stack (nginx now terminates TLS and proxies to the `re` service):
+
+  ```sh
+  docker-compose up -d
+  ```
+
+1. Visit `http://localhost:8080` or `https://localhost:8443`. Adjust the published ports in `docker-compose.yml` if you need to bind directly to 80/443.
+
+See [httpbin.org](http://httpbin.org) for more information.
 
 ## Major Changelog
 
@@ -33,6 +57,6 @@ See http://httpbin.org for more information.
 
 ## SEE ALSO
 
-- http://requestb.in
-- http://python-requests.org
-- https://grpcb.in/
+- [requestb.in](http://requestb.in)
+- [python-requests.org](http://python-requests.org)
+- [grpcb.in](https://grpcb.in/)
