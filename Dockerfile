@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.title="httpbin-re" \
       org.opencontainers.image.source="https://github.com/pichuang/httpbin-re" \
       org.opencontainers.image.licenses="ISC License" \
       org.opencontainers.image.url="https://httpbin.org" \
-      org.opencontainers.image.version="20231013" \
+      org.opencontainers.image.version="20251123" \
       org.opencontainers.image.base.name="library/ubuntu:22.04"
 
 RUN apt update -y && \
