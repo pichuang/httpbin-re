@@ -6,13 +6,13 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # OCI metadata so the image stays self-describing
 LABEL org.opencontainers.image.title="httpbin-re" \
-        org.opencontainers.image.description="HTTP Request and Response Service" \
-        org.opencontainers.image.authors="Kenneth Reitz, Phil Huang <phil.huang@microsoft.com>" \
-        org.opencontainers.image.source="https://github.com/pichuang/httpbin-re" \
-        org.opencontainers.image.licenses="ISC License" \
-        org.opencontainers.image.url="https://httpbin.org" \
-        org.opencontainers.image.version="20251123" \
-        org.opencontainers.image.base.name="library/ubuntu:24.04"
+      org.opencontainers.image.description="HTTP Request and Response Service" \
+      org.opencontainers.image.authors="Kenneth Reitz, Phil Huang <phil.huang@microsoft.com>" \
+      org.opencontainers.image.source="https://github.com/pichuang/httpbin-re" \
+      org.opencontainers.image.licenses="ISC License" \
+      org.opencontainers.image.url="https://httpbin.org" \
+      org.opencontainers.image.version="20251124" \
+      org.opencontainers.image.base.name="library/ubuntu:24.04"
 
 # Python virtual environment plus pip defaults (no cache, quiet upgrades)
 ENV VIRTUAL_ENV=/opt/venv
