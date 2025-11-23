@@ -129,6 +129,13 @@ def get_headers(hide_env=True):
 
     headers = dict(request.headers.items())
 
+    if "Content-Length" not in headers:
+        content_length = request.content_length
+        if content_length in (None, -1):
+            headers["Content-Length"] = "0"
+        else:
+            headers["Content-Length"] = str(content_length)
+
     if hide_env and ('show_env' not in request.args):
         for key in ENV_HEADERS:
             try:
